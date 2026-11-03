@@ -1,58 +1,88 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Kelas Online - Website Lembaga Pelatihan Teknologi
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi web sederhana yang dibangun untuk memenuhi **Technical Test Magang Pembuatan Website**. Aplikasi ini terdiri dari Landing Page untuk pengunjung dan Dashboard Admin untuk mengelola kelas serta data pendaftar.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+##  Daftar Isi
+1. [Spesifikasi Teknis](#-spesifikasi-teknis)
+2. [Fitur Aplikasi](#-fitur-aplikasi)
+3. [Cara Instalasi (Local)](#-cara-instalasi-local)
+4. [Akun Admin](#-akun-admin)
+5. [Template & Aset Pihak Ketiga](#-template--aset-pihak-ketiga)
+6. [Struktur Database](#-struktur-database)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+##  Spesifikasi Teknis
+Aplikasi ini dibangun menggunakan *environment* berikut:
+- **Framework Utama:** Laravel v13.39.0
+- **Bahasa Pemrograman:** PHP v8.3.35
+- **Database:** MySQL (diuji menggunakan Laragon)
+- **Manajemen Dependensi:** Composer v2.9.5
+- **Frontend:** HTML5, CSS3, JavaScript, Bootstrap 5 (via CDN)
+- **Web Server:** Laravel Development Server (`php artisan serve`)
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+##  Fitur Aplikasi
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### A. Landing Page (Pengunjung)
+- **Hero Section:** Menampilkan banner utama dan Call-to-Action.
+- **Daftar Kelas:** Menampilkan kelas berstatus *Published* lengkap dengan pagination.
+- **Pencarian & Filter:** Fitur pencarian berdasarkan judul kelas dan filter berdasarkan kategori.
+- **Detail Kelas:** Halaman informasi lengkap mengenai kelas (deskripsi, instruktur, harga).
+- **Formulir Pendaftaran:** Form pendaftaran (Nama, Email, Nomor Telepon) dengan validasi unik (satu email tidak bisa mendaftar dua kali di kelas yang sama).
+- **Responsif:** Tampilan telah dioptimalkan untuk perangkat mobile (HP) dan desktop.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+### B. Dashboard Admin (Pengelola)
+- **Autentikasi:** Fitur Login dan Logout untuk mengamankan area admin.
+- **Ringkasan Dashboard:** Menampilkan total kelas, total pendaftar, dan tabel 5 pendaftar terbaru.
+- **Kelola Kategori (CRUD):** Tambah, lihat, ubah, hapus, dan cari data kategori.
+- **Kelola Kelas (CRUD):** Tambah, lihat, ubah, hapus, dan cari kelas. Termasuk fitur unggah gambar (disimpan di Storage) dan pengaturan status (*Draft/Published*).
+- **Kelola Pendaftar:** Melihat daftar pendaftar dan mengubah status kelulusan (*Pending, Diterima, Ditolak*).
 
-## Agentic Development
+### C. Fitur Bonus
+- **Ekspor Data:** Fitur untuk mengekspor seluruh data pendaftar ke dalam format file `.csv` (Excel).
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+---
 
+##  Cara Instalasi (Local)
+
+Ikuti langkah-langkah berikut untuk menjalankan aplikasi ini di komputer Anda:
+
+**1. Prasyarat**
+Pastikan komputer Anda sudah terinstal: PHP >= 8.3, Composer, MySQL (Laragon/XAMPP), dan Git.
+
+**2. Clone Repositori**
 ```bash
-composer require laravel/boost --dev
+git clone https://github.com/utaminadira76-hash/kelas-online.git
+cd kelas-online
 
-php artisan boost:install
-```
+**3. Instal Dependensi**
+composer install
+**4. Konfigurasi Environment**
+Copy file .env.example menjadi .env : (cp .env.example .env)
+Generate application key: (php artisan key:generate)
+**5.Setup Database**
+Buka phpMyAdmin (atau tool database favorit Anda).
+Buat database baru dengan nama kelas_online.
+Buka file .env dan sesuaikan bagian berikut:
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=kelas_online
+DB_USERNAME=root
+DB_PASSWORD=
+FILESYSTEM_DISK=public
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+**6.  Migrasi dan Seeder**
+Jalankan perintah ini untuk membuat tabel dan mengisi data dummy (termasuk akun admin):
+(php artisan migrate --seed)
 
-## Contributing
+**7. Symlink Storage**
+Agar gambar kelas bisa diakses publik, jalankan: (php artisan storage:link)
+**8. Jalankan Aplikasi**
+php artisan serve
+Aplikasi dapat diakses di http://localhost:8000.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
