@@ -42,5 +42,33 @@ class CategoryController extends Controller
         ]);
 
         return redirect()->route('admin.categories.index')->with('success', 'Kategori berhasil ditambahkan.');
+    } // <-- Kurung tutup store sudah diperbaiki di sini
+
+    public function edit(Category $category)
+    {
+        return view('admin.categories.edit', compact('category'));
+    }
+
+    public function update(Request $request, Category $category)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255|unique:categories,name,' . $category->id,
+        ], [
+            'name.required' => 'Nama kategori wajib diisi.',
+            'name.unique' => 'Nama kategori sudah ada.',
+        ]);
+
+        $category->update([
+            'name' => $request->name,
+            'slug' => Str::slug($request->name)
+        ]);
+
+        return redirect()->route('admin.categories.index')->with('success', 'Kategori berhasil diperbarui.');
+    }
+
+    public function destroy(Category $category)
+    {
+        $category->delete();
+        return redirect()->route('admin.categories.index')->with('success', 'Kategori berhasil dihapus.');
     }
 }
