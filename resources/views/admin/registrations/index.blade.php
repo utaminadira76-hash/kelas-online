@@ -5,6 +5,10 @@
 @section('content')
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h3 class="fw-bold mb-0">Daftar Pendaftar</h3>
+        <!-- TOMBOL EKSPOR CSV DITAMBAHKAN DI SINI -->
+        <a href="{{ route('admin.registrations.export') }}" class="btn btn-success">
+            <i class="bi bi-file-earmark-excel"></i> Ekspor CSV
+        </a>
     </div>
 
     <div class="card border-0 shadow-sm">
