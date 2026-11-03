@@ -61,8 +61,15 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="#" class="btn btn-sm btn-warning disabled">Edit</a>
-                                    <button class="btn btn-sm btn-danger disabled">Hapus</button>
+                                    <!-- Tombol Edit -->
+                                    <a href="{{ route('admin.courses.edit', $course->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                                    
+                                    <!-- Tombol Hapus (dengan konfirmasi) -->
+                                    <form action="{{ route('admin.courses.destroy', $course->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus kelas ini?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+                                    </form>
                                 </td>
                             </tr>
                         @empty
