@@ -42,7 +42,9 @@
             <a href="{{ route('admin.courses.index') }}" class="{{ request()->routeIs('admin.courses.*') ? 'active' : '' }}">
                   <i class="bi bi-book me-2"></i> Kelas
            </a>
-            <a href="#"><i class="bi bi-people me-2"></i> Pendaftar</a>
+           <a href="{{ route('admin.registrations.index') }}" class="{{ request()->routeIs('admin.registrations.*') ? 'active' : '' }}">
+                <i class="bi bi-people me-2"></i> Pendaftar
+           </a>
         </div>
 
         <!-- Area Konten Utama -->

@@ -28,4 +28,8 @@ Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
     // Kelas
     Route::resource('courses', \App\Http\Controllers\CourseController::class);
 
+    // Pendaftar
+    Route::get('registrations', [\App\Http\Controllers\RegistrationController::class, 'index'])->name('registrations.index');
+    Route::put('registrations/{registration}/status', [\App\Http\Controllers\RegistrationController::class, 'updateStatus'])->name('registrations.update-status');
+
 });
