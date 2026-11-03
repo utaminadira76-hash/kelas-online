@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+use App\Models\Course;
+use App\Models\Registration;
 
 // Halaman Login
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -10,8 +12,14 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Grup Route Admin (Wajib Login)
 Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
-    // Nanti kita isi dashboard di sini
+    
+    // Dashboard
     Route::get('/dashboard', function () {
-        return 'Halaman Dashboard Admin (Segera dibuat)';
+        $totalCourses = Course::count();
+        $totalRegistrations = Registration::count();
+        $recentRegistrations = Registration::with('course')->latest()->take(5)->get();
+
+        return view('admin.dashboard', compact('totalCourses', 'totalRegistrations', 'recentRegistrations'));
     })->name('dashboard');
+
 });
