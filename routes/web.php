@@ -17,6 +17,7 @@ Route::get('/kelas/{course:slug}', [LandingController::class, 'show'])->name('la
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/kelas/{course:slug}/daftar', [LandingController::class, 'register'])->name('landing.register');
 
 // --- RUTE ADMIN (Wajib Login) ---
 Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
@@ -40,4 +41,4 @@ Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
     Route::get('registrations', [RegistrationController::class, 'index'])->name('registrations.index');
     Route::put('registrations/{registration}/status', [RegistrationController::class, 'updateStatus'])->name('registrations.update-status');
 
-});
+}); 
