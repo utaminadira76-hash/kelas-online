@@ -39,7 +39,9 @@
            <a href="{{ route('admin.categories.index') }}" class="{{ request()->routeIs('admin.categories.*') ? 'active' : '' }}">
                 <i class="bi bi-tags me-2"></i> Kategori
            </a>
-            <a href="#"><i class="bi bi-book me-2"></i> Kelas</a>
+            <a href="{{ route('admin.courses.index') }}" class="{{ request()->routeIs('admin.courses.*') ? 'active' : '' }}">
+                  <i class="bi bi-book me-2"></i> Kelas
+           </a>
             <a href="#"><i class="bi bi-people me-2"></i> Pendaftar</a>
         </div>
 

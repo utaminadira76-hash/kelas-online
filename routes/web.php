@@ -25,4 +25,7 @@ Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
     // Kategori
     Route::resource('categories', \App\Http\Controllers\CategoryController::class);
 
+    // Kelas
+    Route::resource('courses', \App\Http\Controllers\CourseController::class);
+
 });
