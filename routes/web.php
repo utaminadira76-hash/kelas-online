@@ -1,16 +1,24 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\LandingController; // <-- Pindah ke atas
 use Illuminate\Support\Facades\Route;
 use App\Models\Course;
 use App\Models\Registration;
 
-// Halaman Login
+// --- RUTE LANDING PAGE (Bisa diakses tanpa login) ---
+Route::get('/', [LandingController::class, 'index'])->name('landing.index');
+Route::get('/kelas/{course:slug}', [LandingController::class, 'show'])->name('landing.show');
+
+// --- RUTE AUTENTIKASI ---
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Grup Route Admin (Wajib Login)
+// --- RUTE ADMIN (Wajib Login) ---
 Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
     
     // Dashboard
@@ -23,13 +31,13 @@ Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
     })->name('dashboard');
 
     // Kategori
-    Route::resource('categories', \App\Http\Controllers\CategoryController::class);
+    Route::resource('categories', CategoryController::class);
 
     // Kelas
-    Route::resource('courses', \App\Http\Controllers\CourseController::class);
+    Route::resource('courses', CourseController::class);
 
     // Pendaftar
-    Route::get('registrations', [\App\Http\Controllers\RegistrationController::class, 'index'])->name('registrations.index');
-    Route::put('registrations/{registration}/status', [\App\Http\Controllers\RegistrationController::class, 'updateStatus'])->name('registrations.update-status');
+    Route::get('registrations', [RegistrationController::class, 'index'])->name('registrations.index');
+    Route::put('registrations/{registration}/status', [RegistrationController::class, 'updateStatus'])->name('registrations.update-status');
 
 });
