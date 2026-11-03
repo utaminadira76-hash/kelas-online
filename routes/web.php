@@ -22,4 +22,7 @@ Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
         return view('admin.dashboard', compact('totalCourses', 'totalRegistrations', 'recentRegistrations'));
     })->name('dashboard');
 
+    // Kategori
+    Route::resource('categories', \App\Http\Controllers\CategoryController::class);
+
 });
